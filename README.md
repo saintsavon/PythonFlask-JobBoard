@@ -1,5 +1,11 @@
 # Build a Job Board with Python & Flask
 
+## Supported runtime
+
+The container uses Python 3.13.17 and a hash-locked Flask 3 dependency set. Local development can use `pip install -r requirements.txt`; to run the smoke test, install `requirements-test.lock` and run `pytest tests/test_runtime_smoke.py`.
+
+The original course exercise tests cover features that are not implemented in this starter app. The full suite is expected to fail until those exercises are completed. Keep local `.env` files outside container images; `.dockerignore` excludes them.
+
 ## Verify Local Environment
 
 ### Create Virtual Environment
