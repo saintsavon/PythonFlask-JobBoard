@@ -2,9 +2,9 @@
 
 ## Supported runtime
 
-The draft container uses Python 3.13.17 and a hash-locked Flask 3 dependency set. Local development can use `python -m pip install --require-hashes -r requirements.txt`. Tests need their separate dependency lock: `python -m pip install --require-hashes -r requirements-test.lock`, then `python -m pytest tests/test_runtime_smoke.py`.
+The draft container targets Python 3.13.18 and a hash-locked Flask 3 dependency set. Local development can use `python -m pip install --require-hashes -r requirements.txt`. Tests need their separate dependency lock: `python -m pip install --require-hashes -r requirements-test.lock`, then `python -m pytest tests/test_runtime_smoke.py`.
 
-Release gate (October 25, 2026): Python 3.13.18 was released with security fixes after this draft was prepared. It is source-only, and an official 3.13.18 Docker image and GitHub Actions Python build were not yet available. Keep this draft unmerged until a supported official image and CI runtime containing those fixes are selected and the lockfiles and smoke test are rechecked. Python 3.13.17 is not the final security target.
+Release gate (October 26, 2026): The official Python Docker catalog now lists `3.13.18-slim-trixie` and the GitHub Actions Python manifest includes 3.13.18 Linux x64. The Docker registry had not published that tag when this draft was checked (`docker manifest inspect` reported `no such manifest` for 3.13.18 slim, slim-trixie, and slim-bookworm; the 3.13.17 control resolved). Keep this draft unmerged until the 3.13.18 image is pullable and the container build and smoke test pass on it. CI uses the published 3.13.18 Actions artifact; it does not validate the container image by itself.
 
 The original course exercise tests cover features that are not implemented in this starter app. The full suite is expected to fail until those exercises are completed. Keep local `.env` files outside container images; `.dockerignore` excludes them.
 
