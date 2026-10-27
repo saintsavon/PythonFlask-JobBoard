@@ -4,7 +4,7 @@
 
 The draft container targets Python 3.13.18 and a hash-locked Flask 3 dependency set. Local development can use `python -m pip install --require-hashes -r requirements.txt`. Tests need their separate dependency lock: `python -m pip install --require-hashes -r requirements-test.lock`, then `python -m pytest tests/test_runtime_smoke.py`.
 
-Release gate (October 26, 2026): The official Python Docker catalog now lists `3.13.18-slim-trixie` and the GitHub Actions Python manifest includes 3.13.18 Linux x64. The Docker registry had not published that tag when this draft was checked (`docker manifest inspect` reported `no such manifest` for 3.13.18 slim, slim-trixie, and slim-bookworm; the 3.13.17 control resolved). Keep this draft unmerged until the 3.13.18 image is pullable and the container build and smoke test pass on it. CI uses the published 3.13.18 Actions artifact; it does not validate the container image by itself.
+Runtime validation (October 27, 2026): The official `python:3.13.18-slim-trixie` image now resolves and runs locally. The draft Dockerfile built on the Mac's arm64 Docker Desktop; its network-disabled container served `/` and `/jobs` with HTTP 200, without `.env` or the tracked database. A separate network-disabled Python 3.13.18 container passed the focused pytest smoke test. The hosted Python 3.13.18 smoke workflow also passed. These checks did not deploy the app or exercise unfinished course features.
 
 The original course exercise tests cover features that are not implemented in this starter app. The full suite is expected to fail until those exercises are completed. Keep local `.env` files outside container images; `.dockerignore` excludes them.
 
